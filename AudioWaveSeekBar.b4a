@@ -1,0 +1,182 @@
+﻿Build1=Default,ir.puzzle.audio.seekbars
+File1=1.bal
+File2=8fbacbd464e996966eb9d4a6b7a9c21e.jpg
+File3=la_la_la.mp3
+FileGroup1=Default Group
+FileGroup2=Default Group
+FileGroup3=Default Group
+Group=Default Group
+Library1=core
+Library2=xui
+Library3=hitex_recyclerview
+Library4=javaobject
+Library5=puzzletak_audiowaveseekbar
+Library6=phone
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="28"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.LightTheme)~\n~'End of default text.~\n~
+Module1=Starter
+NumberOfFiles=3
+NumberOfLibraries=6
+NumberOfModules=1
+Version=11.8
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: PuzzleTak_AudioWaveSeekBar
+	#VersionCode: 1
+	#VersionName: 1.0
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: unspecified
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: True
+#End Region
+
+Sub Process_Globals
+  Dim t As Timer
+End Sub
+' power by PuzzleTak
+Sub Globals
+  Dim pt As PuzzleTak_AudioWaveSeekBar
+  
+ 
+  Dim mp As MediaPlayer
+  
+  
+  Dim cover As Hitex_CardView
+  Dim PlayPause As Label
+  
+  
+ 
+  Dim lb_time As Label
+
+End Sub
+Sub setCornerRadii(v As View, Rx_TopLeft As Float, Ry_TopLeft As Float, Rx_TopRight As Float, Ry_TopRight As Float, Rx_BottomRight As Float, Ry_BottomRight As Float, Rx_BottomLeft As Float, Ry_BottomLeft As Float)
+	Dim jo As JavaObject = v.Background
+	If v.Background Is ColorDrawable Or v.Background Is GradientDrawable Then
+		jo.RunMethod("setCornerRadii", Array As Object(Array As Float(Rx_TopLeft, Ry_TopLeft, Rx_TopRight, Ry_TopRight, Rx_BottomRight, Ry_BottomRight, Rx_BottomLeft, Ry_BottomLeft)))
+	End If
+End Sub
+Sub Activity_Create(FirstTime As Boolean)
+	Activity.SetBackgroundImage(LoadBitmap(File.DirAssets,"8fbacbd464e996966eb9d4a6b7a9c21e.jpg"))
+
+	cover.Initialize("")
+	
+	cover.Elevation = 6.0f
+	cover.Radius = 13.0f
+	Activity.AddView(cover,5%x,10%x,90%x,20%x)
+	cover.Visible =False
+	Dim COD As ColorDrawable
+	COD.Initialize2(0xFFFFFFFF,0dip,0dip,Colors.Transparent)
+	cover.Background = COD
+	setCornerRadii(cover,22.5dip,22.5dip,22.5dip,22.5dip,22.5dip,22.5dip,-10dip,300dip)
+   
+	lb_time.Initialize("")
+	lb_time.Typeface = Typeface.DEFAULT_BOLD
+	lb_time.Text = "12:56"
+	lb_time.Gravity = Bit.Or(Gravity.CENTER_VERTICAL,Gravity.LEFT)
+	lb_time.Color = Colors.Transparent
+	lb_time.textColor = 0xFFCACACA
+	lb_time.SingleLine =True
+	lb_time.TextSize =11
+	cover.Panel.AddView(lb_time,cover.Width - 10%x,cover.Height - 5%x,10%x,5%x)
+   
+   
+	PlayPause.Initialize("PlayPause")
+	PlayPause.SingleLine =True
+	PlayPause.Gravity = Bit.Or(Gravity.CENTER_HORIZONTAL,Gravity.CENTER_VERTICAL)
+	PlayPause.TextColor =0xFFFFFFFF
+	PlayPause.TextSize = 35
+	PlayPause.Text = Chr(0xE037)
+	PlayPause.Typeface = Typeface.MATERIALICONS
+	cover.Panel.AddView(PlayPause,3%x,3%x,cover.Height - 6%x,cover.Height - 6%x)
+	Dim co As ColorDrawable
+	co.Initialize2(0xFF31A6D5,500dip,2dip,0xFF2CA0D0)
+	PlayPause.Background =co
+   
+  
+
+	pt.Initialize("pt")
+	cover.Panel.AddView(pt,PlayPause.Width + 6%x , 1.5%x,cover.Width  - 23%x,cover.Height - 8%x)
+
+
+    pt.RandomUUID
+	mp.Initialize
+	mp.Load(File.DirAssets,"la_la_la.mp3")
+
+
+	Dim p As Phone
+	
+	If p.SdkVersion >= 24 Then
+		pt.TreadGetByteUUIDFromBytes(File.DirAssets,"la_la_la.mp3") ' use android 6 up
+'		pt.TreadDownloadFileUUIDFromBytes("url music") ' use android 6 up
+		Else
+			pt.RandomUUID ' support wave rndom ☺♥ support all version android
+		
+	End If
+	
+	pt.setSeekColor(0xFF31A6D5,0x3CB0B0B0,0xFF31A6D5)
+	pt.onTouch(2,10,15)
+	pt.setSize(80%x,80%y)
+	pt.Duration = mp.Duration
+	pt.Progress =12000
+
+'	Log()
+
+	t.Initialize("t",1000)
+	t.Enabled =False
+	cover.SetVisibleAnimated(300,True)
+   
+End Sub
+
+
+Sub PlayPause_Click
+	
+	Select PlayPause.Text
+		
+		Case   Chr(0xE037) ' play
+			PlayPause.Text = Chr(0xE034)
+			
+			mp.Play
+			t.Enabled =True
+			
+			
+			
+		Case Chr(0xE034)  ' pause
+			PlayPause.Text = Chr(0xE037)
+			
+			
+			mp.Pause
+			t.Enabled =False
+			
+	End Select
+End Sub
+
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+
+Sub pt_SeekBarChangeListener(progress As Int)
+	Log("progress : "&progress)
+	mp.Position = progress
+End Sub
+
+
+
+Sub t_Tick
+	
+	If mp.Position >= mp.Duration  Then
+		mp.Stop
+		t.Enabled =False
+		pt.Progress =0
+		Else
+		pt.Progress = mp.Position
+	End If
+	
+End Sub
