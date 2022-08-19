@@ -3,6 +3,9 @@
 
 ## Getting Started
 
+## show demo
+- [demo](https://instagram.com/puzzletak)
+
 - [Manufacturer: PuzzleTak](https://instagram.com/puzzletak)
 
 # Usage
