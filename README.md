@@ -4,7 +4,7 @@
 ## Getting Started
 
 ## show demo
-- [demo](https://instagram.com/puzzletak)
+- [demo](https://github.com/PuzzleTakX/PuzzleTak_AudioWaveSeekBar/blob/857dfcafb7040ecc96f83332e1ed2fbe13fdd2e2/photo_2022-08-19_16-01-31.jpg)
 
 - [Manufacturer: PuzzleTak](https://instagram.com/puzzletak)
 
