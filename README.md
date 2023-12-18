@@ -3,8 +3,9 @@
 
 ## Getting Started
 
-## show demo
-- [demo](https://github.com/PuzzleTakX/PuzzleTak_AudioWaveSeekBar/blob/857dfcafb7040ecc96f83332e1ed2fbe13fdd2e2/photo_2022-08-19_16-01-31.jpg)
+## Demo new
+
+<img src="https://github.com/PuzzleTakX/PuzzleTak_AudioWaveSeekBar/blob/main/photo_2022-08-19_16-01-31.jpg?raw=true" alt="image_demo" width="300" height="700">
 
 - [Manufacturer: PuzzleTak](https://instagram.com/puzzletak)
 
